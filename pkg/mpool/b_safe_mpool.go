@@ -73,5 +73,8 @@ func (mp *SafeMemPool) Free(buf []byte) {
 	if cap(buf) > mp.freeSize {
 		return
 	}
+	for i := range buf {
+		buf[i] = 0
+	}
 	mp.pool.Put(&buf)
 }
